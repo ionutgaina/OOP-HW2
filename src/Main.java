@@ -3,6 +3,9 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.Action;
 import database.Database;
+import website.CurrentPage;
+import website.CurrentUser;
+import website.Invoker;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,10 +31,16 @@ public class Main {
         ArrayNode output = objectMapper.createArrayNode();
 
         // start task
+        CurrentPage currentPage = CurrentPage.getInstance();
+        CurrentUser currentUser = CurrentUser.getInstance();
+        Invoker invoker = new Invoker();
 
         for (Action action : database.getActions()) {
-
+            invoker.command(action);
         }
+
+        currentPage.clear();
+        currentUser.clear();
 
         // create output file
 

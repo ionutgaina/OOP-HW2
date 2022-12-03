@@ -12,7 +12,6 @@ public class ChangePageCommand implements Command{
     @Override
     public void execute() {
         CurrentPage currentPage = CurrentPage.getInstance();
-        currentPage.setCurrentPage(this.thePage);
         // do something with the page
     }
 }

@@ -5,7 +5,7 @@ import database.User;
 public final class CurrentUser {
     public static CurrentUser instance = null;
 
-    private User currentUser;
+    private User currentUser = null;
 
     private CurrentUser() { }
 
@@ -22,5 +22,9 @@ public final class CurrentUser {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void clear() {
+        currentUser = null;
     }
 }

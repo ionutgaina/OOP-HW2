@@ -5,11 +5,11 @@ public final class CurrentPage {
 
     private String currentPage = "unlogged";
 
-    private CurrentPage() { }
+    private CurrentPage() {
+    }
 
     public static CurrentPage getInstance() {
-        if (instance == null )
-        {
+        if (instance == null) {
             instance = new CurrentPage();
         }
         return instance;
@@ -21,5 +21,9 @@ public final class CurrentPage {
 
     public void setCurrentPage(String currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public void clear() {
+        currentPage = "unlogged";
     }
 }
