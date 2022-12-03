@@ -1,18 +1,19 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import database.Action;
 import database.Database;
+
 import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         String filePath = args[0];
         String resultFile = args[1];
 
         // Here we choose the test file
-        if (!filePath.contains("1."))
-        {
+        if (!filePath.contains("1.")) {
             return;
         }
 
@@ -28,9 +29,12 @@ public class Main {
 
         // start task
 
+        for (Action action : database.getActions()) {
 
+        }
 
         // create output file
+
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(resultFile), output);
     }
