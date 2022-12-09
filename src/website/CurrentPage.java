@@ -3,7 +3,7 @@ package website;
 public final class CurrentPage {
     private static CurrentPage instance = null;
 
-    private String currentPage = "unlogged";
+    private String currentPage = "home";
 
     private CurrentPage() {
     }
@@ -24,6 +24,6 @@ public final class CurrentPage {
     }
 
     public void clear() {
-        currentPage = "unlogged";
+        currentPage = "home";
     }
 }
