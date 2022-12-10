@@ -1,9 +1,17 @@
 package website;
 
+import database.Movie;
+import lombok.Data;
+
+import java.util.ArrayList;
+
+@Data
 public final class CurrentPage {
     private static CurrentPage instance = null;
 
-    private String currentPage = "home";
+    private String page;
+    private ArrayList<Movie> currentMoviesList;
+    
 
     private CurrentPage() {
     }
@@ -16,14 +24,15 @@ public final class CurrentPage {
     }
 
     public String getCurrentPage() {
-        return currentPage;
+        return page;
     }
 
     public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
+        this.page = currentPage;
     }
 
-    public void clear() {
-        currentPage = "home";
+    public void init() {
+        page = "home";
+        currentMoviesList = new ArrayList();
     }
 }

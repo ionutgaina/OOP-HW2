@@ -1,11 +1,13 @@
 package website;
 
 import database.User;
+import lombok.Data;
 
+@Data
 public final class CurrentUser {
     public static CurrentUser instance = null;
 
-    private User currentUser = null;
+    private User user;
 
     private CurrentUser() { }
 
@@ -16,15 +18,7 @@ public final class CurrentUser {
         return instance;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public void clear() {
-        currentUser = null;
+    public void init() {
+        user = null;
     }
 }

@@ -1,67 +1,28 @@
 package website.handlers;
 
-import website.CurrentPage;
-import website.Invoker;
-
-import java.util.Arrays;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import utilities.Output;
+import website.pages.unlogged.Login.Login;
+import website.pages.unlogged.Register.Register;
 
 public class ChangePageHandler {
-//    private void changePage(String page) {
-//        CurrentPage currentPage = CurrentPage.getInstance();
-//        boolean resultCurrentPage;
-//
-//        resultCurrentPage = Arrays
-//                .stream(Invoker.unLoggedEnum.values())
-//                .map(Invoker.unLoggedEnum::getPage)
-//                .anyMatch(currentPage.getCurrentPage()::contains);
-//
-//        if (resultCurrentPage) {
-//            switch (page) {
-//                case "login", "register" -> {
-//                    System.out.println("nelogat");
-//                    acceptChangePage(page);
-//                    return;
-//                }
-//                default -> {
-//                    System.out.println("eroare nelogat");
-//                    // error
-//                    return;
-//                }
-//            }
-//        }
-//
-//        resultCurrentPage = Arrays.stream(Invoker.loggedEnum.values())
-//                .map(Invoker.loggedEnum::getPage)
-//                .anyMatch(currentPage.getCurrentPage()::contains);
-//
-//        if (resultCurrentPage) {
-//            switch (page) {
-//                case "upgrades":
-//                case "movies":
-//                    System.out.println("logat");
-//                    acceptChangePage(page);
-//                    return;
-//                case "logout":
-//                    System.out.println("ma deloghez");
-//                    acceptChangePage(page);
-//                    return;
-//
-//                case "see details":
-//                    if (currentPage.getCurrentPage().equals("see details"))
-//                    {
-//                        //error
-//                        System.out.println("details error");
-//                        return;
-//                    }
-//
-//                    return;
-//                default:
-//                    // error
-//                    System.out.println("eroare logat");
-//            }
-//        }
-//
-//        // error
-//    }
+    private ChangePageHandler() {
+    }
 
+    public static void handle(String page, Output outputObject) {
+        boolean noError = true;
+
+        switch (page) {
+            case "register" -> noError = Register.changePage();
+            case "login" -> noError = Login.changePage();
+            case "logout" -> noError = Login.logout();
+            default -> noError = false;
+        }
+
+        // Error handling
+        if (!noError || page.equals("movies") || page.equals("see details")) {
+            ArrayNode output = outputObject.getOutput();
+            output.addPOJO(new ErrorHandler(!noError));
+        }
+    }
 }

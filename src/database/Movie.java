@@ -13,6 +13,15 @@ public final class Movie {
     public Movie() {
     }
 
+    public Movie(Movie movie) {
+        this.name = movie.getName();
+        this.year = movie.getYear();
+        this.duration = movie.getDuration();
+        this.genres = movie.getGenres();
+        this.actors = movie.getActors();
+        this.countriesBanned = movie.getCountriesBanned();
+    }
+
     public String getName() {
         return name;
     }

@@ -1,10 +1,14 @@
 package database;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 public final class Credentials {
     private String name;
     private String password;
     private String accountType;
     private String country;
+    @JsonSerialize(using = ToStringSerializer.class)
     private int balance;
 
     public Credentials() { }
