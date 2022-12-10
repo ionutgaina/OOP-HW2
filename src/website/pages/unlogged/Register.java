@@ -1,11 +1,11 @@
-package website.pages.unlogged.Register;
+package website.pages.unlogged;
 
 import database.Credentials;
 import database.Database;
 import database.User;
+import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
-import website.pages.unlogged.AuthController;
 
 public class Register {
     private Register() {
@@ -15,23 +15,25 @@ public class Register {
         CurrentPage currentPage = CurrentPage.getInstance();
         User currentUser = CurrentUser.getInstance().getUser();
 
-        if (currentPage.getCurrentPage().equals("home") && currentUser == null) {
-            currentPage.setCurrentPage("register");
+        if (currentPage.getPage().equals("home") && currentUser == null) {
+            currentPage.setPage("register");
             return true;
         } else {
             return false;
         }
     }
 
-    public static boolean register(Credentials credentials, String currentPage, Database database) {
+    public static boolean register(Credentials credentials) {
+        String currentPage = CurrentPage.getInstance().getPage();
+        CurrentPage.getInstance().setPage("home");
         if (!currentPage.equals("register")) {
             return false;
         }
 
         AuthController authController = AuthController.getInstance();
+        Database database = CurrentDatabase.getInstance().getDatabase();
 
         User loggedUser = authController.register(credentials, database);
-        System.out.println(loggedUser);
         if (loggedUser == null) {
             return false;
         }

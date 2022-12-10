@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import database.Action;
 import database.Database;
 import utilities.Output;
+import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
 import website.handlers.ChangePageHandler;
@@ -17,7 +18,7 @@ public class Main {
         String resultFile = args[1];
 
         // Here we choose the test file
-        if (!filePath.contains("1.")) {
+        if (!filePath.contains("2.")) {
             return;
         }
 
@@ -37,10 +38,12 @@ public class Main {
         // start task
         CurrentPage currentPage = CurrentPage.getInstance();
         CurrentUser currentUser = CurrentUser.getInstance();
+        CurrentDatabase currentDatabase = CurrentDatabase.getInstance();
 
         // init singleton instances values
         currentPage.init();
         currentUser.init();
+        currentDatabase.init(database);
 
         // iterate over actions
         for (Action action : database.getActions()) {
@@ -51,7 +54,7 @@ public class Main {
                 ChangePageHandler.handle(nextPage, outputObject);
             }
             if (type.equals("on page")) {
-                OnPageHandler.handle(action, database, outputObject);
+                OnPageHandler.handle(action, outputObject);
             }
         }
 

@@ -23,16 +23,16 @@ public final class CurrentPage {
         return instance;
     }
 
-    public String getCurrentPage() {
+    public String getPage() {
         return page;
     }
 
-    public void setCurrentPage(String currentPage) {
+    public void setPage(String currentPage) {
         this.page = currentPage;
     }
 
     public void init() {
         page = "home";
-        currentMoviesList = new ArrayList();
+        currentMoviesList = new ArrayList<>();
     }
 }

@@ -2,8 +2,9 @@ package website.handlers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import utilities.Output;
-import website.pages.unlogged.Login.Login;
-import website.pages.unlogged.Register.Register;
+import website.pages.logged.Movies;
+import website.pages.unlogged.Login;
+import website.pages.unlogged.Register;
 
 public class ChangePageHandler {
     private ChangePageHandler() {
@@ -16,6 +17,7 @@ public class ChangePageHandler {
             case "register" -> noError = Register.changePage();
             case "login" -> noError = Login.changePage();
             case "logout" -> noError = Login.logout();
+            case "movies" -> noError = Movies.changePage();
             default -> noError = false;
         }
 

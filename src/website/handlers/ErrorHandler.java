@@ -35,7 +35,6 @@ public class ErrorHandler {
         });
 
         User user = CurrentUser.getInstance().getUser();
-        System.out.println(user);
         this.currentUser = new User(user);
     }
 }

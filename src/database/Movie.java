@@ -1,7 +1,10 @@
 package database;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 
+@Data
 public final class Movie {
     private String name;
     private int year;
@@ -9,6 +12,10 @@ public final class Movie {
     private ArrayList<String> genres;
     private ArrayList<String> actors;
     private ArrayList<String> countriesBanned;
+
+    private int numLikes = 0;
+    private int numRatings = 0;
+    private double rating = 0;
 
     public Movie() {
     }
@@ -20,6 +27,9 @@ public final class Movie {
         this.genres = movie.getGenres();
         this.actors = movie.getActors();
         this.countriesBanned = movie.getCountriesBanned();
+        this.numLikes = movie.getNumLikes();
+        this.numRatings = movie.getNumRatings();
+        this.rating = movie.getRating();
     }
 
     public String getName() {
