@@ -6,11 +6,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class SortByLikes implements ISort {
+
+    private String sortType;
+
+    SortByLikes(final String sortType) {
+        this.sortType = sortType;
+    }
     @Override
-    public void doSort(final ArrayList<Movie> movies, final String sortType) {
-        if (sortType.equals("asc")) {
+    public void doSort(final ArrayList<Movie> movies) {
+        if (this.sortType.equals("increasing")) {
             movies.sort(Comparator.comparing(Movie::getNumLikes));
-        } else if(sortType.equals("desc")) {
+        } else if(this.sortType.equals("decreasing")) {
             movies.sort(Comparator.comparing(Movie::getNumLikes).reversed());
         } else {
             throw new IllegalArgumentException("Invalid sort type");

@@ -18,9 +18,9 @@ public class Main {
         String resultFile = args[1];
 
         // Here we choose the test file
-        if (!filePath.contains("3.")) {
-            return;
-        }
+//        if (!filePath.contains("3.")) {
+//            return;
+//        }
 
         ObjectMapper objectMapper = new ObjectMapper();
 

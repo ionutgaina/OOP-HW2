@@ -21,6 +21,8 @@ public class OnPageHandler {
             case "register" -> noError = Register.register(action.getCredentials());
 
             case "search" -> noError = Movies.search(action.getStartsWith());
+
+            case "filter" -> noError = Movies.filter(action.getFilters());
             default -> noError = false;
         }
 
