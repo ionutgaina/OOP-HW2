@@ -4,7 +4,7 @@ import database.Movie;
 
 import java.util.ArrayList;
 
-public class SortByDurationRating{
+public final class SortByDurationRating {
     private final String durationSortType;
     private final String ratingSortType;
 
@@ -13,7 +13,12 @@ public class SortByDurationRating{
         this.ratingSortType = ratingSortType;
     }
 
-    public void doSort(ArrayList<Movie> movies) {
+    /**
+     * Sorts the movies by duration and rating
+     *
+     * @param movies the list of movies
+     */
+    public void doSort(final ArrayList<Movie> movies) {
         movies.sort((o1, o2) -> {
             if (o1.getDuration() > o2.getDuration()) {
                 return durationSortType.equals("increasing") ? 1 : -1;

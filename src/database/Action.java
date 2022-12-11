@@ -13,13 +13,14 @@ public final class Action {
     private String count;
     private int rate;
 
-    public Action() { }
+    public Action() {
+    }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -27,7 +28,7 @@ public final class Action {
         return page;
     }
 
-    public void setPage(String page) {
+    public void setPage(final String page) {
         this.page = page;
     }
 
@@ -35,7 +36,7 @@ public final class Action {
         return movie;
     }
 
-    public void setMovie(String movie) {
+    public void setMovie(final String movie) {
         this.movie = movie;
     }
 
@@ -43,7 +44,7 @@ public final class Action {
         return feature;
     }
 
-    public void setFeature(String feature) {
+    public void setFeature(final String feature) {
         this.feature = feature;
     }
 
@@ -51,7 +52,7 @@ public final class Action {
         return credentials;
     }
 
-    public void setCredentials(Credentials credentials) {
+    public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
     }
 
@@ -59,7 +60,7 @@ public final class Action {
         return startsWith;
     }
 
-    public void setStartsWith(String startsWith) {
+    public void setStartsWith(final String startsWith) {
         this.startsWith = startsWith;
     }
 
@@ -67,7 +68,7 @@ public final class Action {
         return filters;
     }
 
-    public void setFilters(Filters filters) {
+    public void setFilters(final Filters filters) {
         this.filters = filters;
     }
 
@@ -75,7 +76,7 @@ public final class Action {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(final String count) {
         this.count = count;
     }
 
@@ -83,22 +84,7 @@ public final class Action {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(final int rate) {
         this.rate = rate;
-    }
-
-    @Override
-    public String toString() {
-        return "Action{" +
-               "type='" + type + '\'' +
-               ", page='" + page + '\'' +
-               ", movie='" + movie + '\'' +
-               ", feature='" + feature + '\'' +
-               ", credentials=" + credentials +
-               ", startsWith='" + startsWith + '\'' +
-               ", filters=" + filters +
-               ", count='" + count + '\'' +
-               ", rate=" + rate +
-               '}';
     }
 }

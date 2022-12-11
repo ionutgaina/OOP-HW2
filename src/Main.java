@@ -12,9 +12,16 @@ import website.handlers.OnPageHandler;
 import java.io.File;
 import java.io.IOException;
 
-public class Main {
-    public static void main(String[] args) {
-        String filePath = args[0];
+public final class Main {
+    private Main() {
+    }
+
+    /**
+     * @param args the command line arguments
+     * @throws IOException if an I/O error occurs
+     */
+    public static void main(final String[] args) {
+        String filePath   = args[0];
         String resultFile = args[1];
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -31,8 +38,8 @@ public class Main {
         Output outputObject = new Output(objectMapper);
 
         // start task
-        CurrentPage currentPage = CurrentPage.getInstance();
-        CurrentUser currentUser = CurrentUser.getInstance();
+        CurrentPage     currentPage     = CurrentPage.getInstance();
+        CurrentUser     currentUser     = CurrentUser.getInstance();
         CurrentDatabase currentDatabase = CurrentDatabase.getInstance();
 
         // init singleton instances values
@@ -42,7 +49,7 @@ public class Main {
 
         // iterate over actions
         for (Action action : database.getActions()) {
-            String type = action.getType();
+            String type     = action.getType();
             String nextPage = action.getPage();
 
             if (type.equals("change page")) {

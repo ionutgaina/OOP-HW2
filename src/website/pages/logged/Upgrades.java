@@ -14,7 +14,15 @@ import java.util.ArrayList;
 import static utilities.Constants.PREMIUM_PRICE;
 
 
-public class Upgrades {
+public final class Upgrades {
+    private Upgrades() {
+    }
+
+    /**
+     * handle the change page to upgrades
+     *
+     * @return if the page was changed
+     */
     public static boolean changePage() {
         CurrentPage currentPage = CurrentPage.getInstance();
         User currentUser = CurrentUser.getInstance().getUser();
@@ -36,7 +44,15 @@ public class Upgrades {
         return false;
     }
 
-    private static void initPage(User currentUser, CurrentPage currentPage, Database database) {
+    /**
+     * initialize the page
+     *
+     * @param currentUser the current user
+     * @param currentPage the current page
+     * @param database    the database
+     */
+    private static void initPage(final User currentUser, final CurrentPage currentPage,
+                                 final Database database) {
         currentPage.setPage("upgrades");
         ArrayList<String> countryFilter = new ArrayList<>();
         countryFilter.add(currentUser.getCredentials().getCountry());
@@ -45,6 +61,11 @@ public class Upgrades {
         currentPage.setCurrentMoviesList(movies);
     }
 
+    /**
+     * handle the upgrade to premium
+     *
+     * @return if the upgrade was successful
+     */
     public static boolean buyPremium() {
         User currentUser = CurrentUser.getInstance().getUser();
 
@@ -62,7 +83,13 @@ public class Upgrades {
         return true;
     }
 
-    public static boolean buyTokens(int tokensCount) {
+    /**
+     * handle the payment for tokens
+     *
+     * @param tokensCount the number of tokens to be bought
+     * @return if the payment was successful
+     */
+    public static boolean buyTokens(final int tokensCount) {
         User currentUser = CurrentUser.getInstance().getUser();
 
         // verify if the user has enough balance
@@ -71,7 +98,8 @@ public class Upgrades {
         }
 
         currentUser.setTokensCount(currentUser.getTokensCount() + tokensCount);
-        currentUser.getCredentials().setBalance(currentUser.getCredentials().getBalance() - tokensCount);
+        currentUser.getCredentials()
+                   .setBalance(currentUser.getCredentials().getBalance() - tokensCount);
 
         return true;
     }

@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.*;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+
 
 class Config {
     private String homework;
@@ -138,8 +144,8 @@ public final class Test {
 
             preTestCleanUp();
 
-            final String[] testArgv = createTestArgv(testFile);
-            final Future<Object> future = createTimerTask(testArgv);
+            final String[]       testArgv = createTestArgv(testFile);
+            final Future<Object> future   = createTimerTask(testArgv);
 
             runTest(testFileName, config, future);
         }
@@ -147,9 +153,9 @@ public final class Test {
         score += Checkstyle.testCheckstyle();
         System.out.println("Total score: .......................... " + score + "/" + totalScore);
         System.out.println("Up to "
-                + manualScore
-                + " points will be awarded manually by the teaching assistants."
-                + " (README & OOP design)");
+                           + manualScore
+                           + " points will be awarded manually by the teaching assistants."
+                           + " (README & OOP design)");
         System.out.println("This value can be exceeded for great implementations.");
     }
 
@@ -157,9 +163,9 @@ public final class Test {
             final String testFileName,
             final Config config,
             final Future<Object> task
-    ) {
+                               ) {
         ObjectMapper objectMapper = new ObjectMapper();
-        File refFile = new File(CHECKER_RESOURCES_FOLDER + REF_FOLDER + testFileName);
+        File         refFile      = new File(CHECKER_RESOURCES_FOLDER + REF_FOLDER + testFileName);
 
         try {
             task.get(MAX_MILLISECONDS_PER_TEST, TimeUnit.MILLISECONDS);
@@ -177,7 +183,7 @@ public final class Test {
             printMessage(testFileName, "Output file not found. Skipping test...");
         } else {
             try {
-                var actual = objectMapper.readTree(TEST_OUT_FILE);
+                var actual   = objectMapper.readTree(TEST_OUT_FILE);
                 var expected = objectMapper.readTree(refFile);
 
                 final int testScore = testMaxScore(config, testFileName);
@@ -220,7 +226,7 @@ public final class Test {
     private static void printMessage(
             final String testFileName,
             final String message
-    ) {
+                                    ) {
         printMessage(testFileName, message, false);
     }
 
@@ -228,7 +234,7 @@ public final class Test {
             final String testFileName,
             final String message,
             final boolean trail
-    ) {
+                                    ) {
         String fileName = testFileName.split("\\.")[0];
         if (trail) {
             System.out.println("[" + fileName + "]: ..................... " + message);
@@ -240,7 +246,7 @@ public final class Test {
     private static int testMaxScore(
             final Config config,
             final String testFileName
-    ) {
+                                   ) {
         for (TestType testType : config.getTestTypes()) {
             if (testFileName.contains(testType.getType())) {
                 return testType.getScore();

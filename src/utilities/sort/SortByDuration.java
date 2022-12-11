@@ -5,7 +5,7 @@ import database.Movie;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class SortByDuration implements ISort {
+public final class SortByDuration implements ISort {
     private final String sortType;
 
     SortByDuration(final String sortType) {
@@ -16,8 +16,9 @@ public class SortByDuration implements ISort {
     public void doSort(final ArrayList<Movie> movies) {
         if (this.sortType.equals("increasing")) {
             movies.sort(Comparator.comparing(Movie::getDuration));
-        } else if(this.sortType.equals("decreasing")) {
-            movies.sort(Comparator.comparing(Movie::getDuration).reversed());
+        } else if (this.sortType.equals("decreasing")) {
+            movies.sort(Comparator.comparing(Movie::getDuration)
+                                  .reversed());
         } else {
             throw new IllegalArgumentException("Invalid sort type");
         }

@@ -9,12 +9,12 @@ import website.CurrentUser;
 import java.util.ArrayList;
 
 @Data
-public class ErrorHandler {
+public final class ErrorHandler {
     private ArrayList<Movie> currentMoviesList;
     private String error;
     private User currentUser;
 
-    public ErrorHandler(boolean isError) {
+    public ErrorHandler(final boolean isError) {
         if (isError) {
             error();
         } else {
@@ -22,19 +22,27 @@ public class ErrorHandler {
         }
     }
 
+    /**
+     * Sets the error message.
+     */
     private void error() {
         this.error = "Error";
         this.currentMoviesList = new ArrayList<>();
     }
 
+    /**
+     * Sets the success message.
+     */
     private void success() {
         this.currentMoviesList = new ArrayList<>();
-        ArrayList<Movie> moviesList = CurrentPage.getInstance().getCurrentMoviesList();
+        ArrayList<Movie> moviesList = CurrentPage.getInstance()
+                                                 .getCurrentMoviesList();
         moviesList.forEach((movie) -> {
             this.currentMoviesList.add(new Movie(movie));
         });
 
-        User user = CurrentUser.getInstance().getUser();
+        User user = CurrentUser.getInstance()
+                               .getUser();
         this.currentUser = new User(user);
     }
 }

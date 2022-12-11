@@ -5,10 +5,11 @@ import database.Movie;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class FilterByActors implements IFilter{
+public final class FilterByActors implements IFilter {
     @Override
-    public ArrayList<Movie> doFilter(ArrayList<Movie> movies, ArrayList<String> filters) {
-        if(filters == null) {
+    public ArrayList<Movie> doFilter(final ArrayList<Movie> movies,
+                                     final ArrayList<String> filters) {
+        if (filters == null) {
             return movies;
         }
 
@@ -16,7 +17,8 @@ public class FilterByActors implements IFilter{
                 .stream()
                 .filter(movie -> filters
                         .stream()
-                        .anyMatch( actor-> movie.getActors().contains(actor)))
+                        .anyMatch(actor -> movie.getActors()
+                                                .contains(actor)))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

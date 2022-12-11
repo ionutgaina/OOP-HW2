@@ -7,12 +7,14 @@ public final class Database {
     private ArrayList<Movie> movies;
     private ArrayList<Action> actions;
 
-    public Database() { }
+    public Database() {
+    }
+
     public ArrayList<User> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public void setUsers(final ArrayList<User> users) {
         this.users = users;
     }
 
@@ -20,7 +22,7 @@ public final class Database {
         return movies;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(final ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
@@ -28,16 +30,7 @@ public final class Database {
         return actions;
     }
 
-    public void setActions(ArrayList<Action> actions) {
+    public void setActions(final ArrayList<Action> actions) {
         this.actions = actions;
-    }
-
-    @Override
-    public String toString() {
-        return "Database{" +
-               "users=" + users +
-               ", movies=" + movies +
-               ", actions=" + actions +
-               '}';
     }
 }

@@ -6,7 +6,11 @@ import database.User;
 import database.filters.Contains;
 import database.filters.Filters;
 import database.filters.Sort;
-import utilities.filters.*;
+import utilities.filters.IFilter;
+import utilities.filters.FilterByName;
+import utilities.filters.FilterByGenre;
+import utilities.filters.FilterByCountry;
+import utilities.filters.FilterByActors;
 import utilities.sort.ISort;
 import utilities.sort.SortByDurationRating;
 import utilities.sort.SortFactory;
@@ -16,7 +20,14 @@ import website.CurrentUser;
 
 import java.util.ArrayList;
 
-public class Movies {
+public final class Movies {
+    private Movies() {
+    }
+    /**
+     * handle the request to change to movies page
+     *
+     * @return if the page was changed
+     */
     public static boolean changePage() {
         CurrentPage currentPage = CurrentPage.getInstance();
         User currentUser = CurrentUser.getInstance().getUser();
@@ -39,7 +50,15 @@ public class Movies {
         return false;
     }
 
-    private static void initPage(User currentUser, CurrentPage currentPage, Database database) {
+    /**
+     * initialize the movies page
+     *
+     * @param currentUser the current user
+     * @param currentPage the current page
+     * @param database    the database
+     */
+    private static void initPage(final User currentUser, final CurrentPage currentPage,
+                                 final Database database) {
         currentPage.setPage("movies");
         ArrayList<String> countryFilter = new ArrayList<>();
         countryFilter.add(currentUser.getCredentials().getCountry());
@@ -48,8 +67,13 @@ public class Movies {
         currentPage.setCurrentMoviesList(movies);
     }
 
-    // search for movies
-    public static boolean search(String startsWith) {
+    /**
+     * search for movies
+     *
+     * @param startsWith the search string
+     * @return if the search was successful
+     */
+    public static boolean search(final String startsWith) {
         CurrentPage currentPage = CurrentPage.getInstance();
         String page = currentPage.getPage();
         if (!page.equals("movies")) {
@@ -75,8 +99,13 @@ public class Movies {
         return true;
     }
 
-    // filter movies
-    public static boolean filter(Filters filters) {
+    /**
+     * filter movies
+     *
+     * @param filters the filters
+     * @return if the filter was successful
+     */
+    public static boolean filter(final Filters filters) {
         CurrentPage currentPage = CurrentPage.getInstance();
         String page = currentPage.getPage();
         if (!page.equals("movies")) {
@@ -111,7 +140,8 @@ public class Movies {
                 sortByDurationRating.doSort(movies);
             } else {
                 String sortCriteria = sort.getDuration() != null ? "duration" : "rating";
-                String sortType = sort.getDuration() != null ? sort.getDuration() : sort.getRating();
+                String sortType = sort.getDuration() != null ? sort.getDuration()
+                                                             : sort.getRating();
                 ISort sortBy = new SortFactory().createSort(sortCriteria, sortType);
                 sortBy.doSort(movies);
             }

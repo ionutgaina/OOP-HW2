@@ -11,45 +11,41 @@ import website.pages.unlogged.Register;
 import java.util.Arrays;
 import java.util.List;
 
-public class OnPageHandler {
+public final class OnPageHandler {
     private OnPageHandler() {
     }
 
-    public static void handle(Action action, Output outputObject) {
+    /**
+     * handle the on page action
+     *
+     * @param action action to be handled
+     */
+    public static void handle(final Action action, final Output outputObject) {
         String feature = action.getFeature();
-        boolean noError = true;
 
-        switch (feature) {
-            case "login" ->
-                    noError = Login.login(action.getCredentials().getName(),
-                            action.getCredentials().getPassword());
-
-            case "register" -> noError = Register.register(action.getCredentials());
-
-            case "search" -> noError = Movies.search(action.getStartsWith());
-
-            case "filter" -> noError = Movies.filter(action.getFilters());
-
-            case "purchase" -> noError = SeeDetails.purchase();
-
-            case "watch" -> noError = SeeDetails.watch();
-
-            case "like" -> noError = SeeDetails.like();
-
-            case "rate" -> noError = SeeDetails.rate(action.getRate());
-
-            case "buy premium account" -> noError = Upgrades.buyPremium();
-
-            case "buy tokens" -> noError = Upgrades.buyTokens(Integer.parseInt(action.getCount()));
-
-            default -> noError = false;
-        }
+        boolean noError = switch (feature) {
+            case "login" -> Login.login(action.getCredentials()
+                                              .getName(), action.getCredentials()
+                                                                .getPassword());
+            case "register" -> Register.register(action.getCredentials());
+            case "search" -> Movies.search(action.getStartsWith());
+            case "filter" -> Movies.filter(action.getFilters());
+            case "purchase" -> SeeDetails.purchase();
+            case "watch" -> SeeDetails.watch();
+            case "like" -> SeeDetails.like();
+            case "rate" -> SeeDetails.rate(action.getRate());
+            case "buy premium account" -> Upgrades.buyPremium();
+            case "buy tokens" -> Upgrades.buyTokens(Integer.parseInt(action.getCount()));
+            default -> false;
+        };
 
         // Error handling
-        List showErrorList = Arrays.asList("login", "register", "search", "filter", "purchase",
-                "watch", "like", "rate");
+        List<String> showErrorList = Arrays.asList("login", "register", "search", "filter",
+                                                   "purchase",
+                                                   "watch", "like", "rate");
         if (!noError || showErrorList.contains(feature)) {
-            outputObject.getOutput().addPOJO(new ErrorHandler(!noError));
+            outputObject.getOutput()
+                        .addPOJO(new ErrorHandler(!noError));
         }
     }
 }

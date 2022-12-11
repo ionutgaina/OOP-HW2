@@ -9,22 +9,27 @@ import website.pages.logged.Upgrades;
 import website.pages.unlogged.Login;
 import website.pages.unlogged.Register;
 
-public class ChangePageHandler {
+public final class ChangePageHandler {
     private ChangePageHandler() {
     }
 
-    public static void handle(String page, Action action, Output outputObject) {
-        boolean noError = true;
-
-        switch (page) {
-            case "register" -> noError = Register.changePage();
-            case "login" -> noError = Login.changePage();
-            case "logout" -> noError = Login.logout();
-            case "movies" -> noError = Movies.changePage();
-            case "see details" -> noError = SeeDetails.changePage(action.getMovie());
-            case "upgrades" -> noError = Upgrades.changePage();
-            default -> noError = false;
-        }
+    /**
+     * handle the changePage action
+     *
+     * @param page         the page to be changed to
+     * @param action       the action to be executed
+     * @param outputObject the output object
+     */
+    public static void handle(final String page, final Action action, final Output outputObject) {
+        boolean noError = switch (page) {
+            case "register" -> Register.changePage();
+            case "login" -> Login.changePage();
+            case "logout" -> Login.logout();
+            case "movies" -> Movies.changePage();
+            case "see details" -> SeeDetails.changePage(action.getMovie());
+            case "upgrades" -> Upgrades.changePage();
+            default -> false;
+        };
 
         // Error handling
         if (!noError || page.equals("movies") || page.equals("see details")) {

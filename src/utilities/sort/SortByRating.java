@@ -5,7 +5,7 @@ import database.Movie;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class SortByRating implements ISort {
+public final class SortByRating implements ISort {
     private final String sortType;
 
     SortByRating(final String sortType) {
@@ -17,7 +17,8 @@ public class SortByRating implements ISort {
         if (sortType.equals("increasing")) {
             movies.sort(Comparator.comparing(Movie::getRating));
         } else if (sortType.equals("desc")) {
-            movies.sort(Comparator.comparing(Movie::getRating).reversed());
+            movies.sort(Comparator.comparing(Movie::getRating)
+                                  .reversed());
         } else {
             throw new IllegalArgumentException("Invalid sort type");
         }

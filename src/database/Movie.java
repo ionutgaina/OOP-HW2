@@ -2,31 +2,28 @@ package database;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import website.CurrentDatabase;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Data
 public final class Movie {
+    @JsonIgnore
+    private ArrayList<Double> ratings = new ArrayList<>();
     private String name;
     private int year;
     private int duration;
     private ArrayList<String> genres;
     private ArrayList<String> actors;
     private ArrayList<String> countriesBanned;
-
     private int numLikes = 0;
     private int numRatings = 0;
     private double rating = 0;
 
-    @JsonIgnore
-    ArrayList<Double> ratings = new ArrayList<>();
-
     public Movie() {
     }
 
-    public Movie(Movie movie) {
+    public Movie(final Movie movie) {
         this.name = movie.getName();
         this.year = movie.getYear();
         this.duration = movie.getDuration();
@@ -39,10 +36,16 @@ public final class Movie {
         this.ratings = movie.getRatings();
     }
 
+    /**
+     * operations to be performed when a user rate a movie
+     *
+     * @param rate the rating given by the user
+     */
     public void addRate(final double rate) {
         ratings.add(rate);
         numRatings++;
-        this.rating = ratings.stream().collect(Collectors.averagingDouble(Double::doubleValue));
+        this.rating = ratings.stream()
+                             .collect(Collectors.averagingDouble(Double::doubleValue));
     }
 
     public String getName() {
@@ -67,17 +70,5 @@ public final class Movie {
 
     public ArrayList<String> getCountriesBanned() {
         return countriesBanned;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-               "name='" + name + '\'' +
-               ", year=" + year +
-               ", duration=" + duration +
-               ", genres=" + genres +
-               ", actors=" + actors +
-               ", countriesBanned=" + countriesBanned +
-               '}';
     }
 }

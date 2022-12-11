@@ -5,19 +5,26 @@ import lombok.Data;
 
 @Data
 public final class CurrentUser {
-    public static CurrentUser instance = null;
+    private static CurrentUser instance = null;
 
     private User user;
 
-    private CurrentUser() { }
+    private CurrentUser() {
+    }
 
+    /**
+     * @return the instance of CurrentUser ( singleton )
+     */
     public static CurrentUser getInstance() {
-        if ( instance == null ) {
+        if (instance == null) {
             instance = new CurrentUser();
         }
         return instance;
     }
 
+    /**
+     * reset the user to null
+     */
     public void init() {
         user = null;
     }

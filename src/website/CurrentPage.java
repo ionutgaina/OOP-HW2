@@ -11,11 +11,14 @@ public final class CurrentPage {
 
     private String page;
     private ArrayList<Movie> currentMoviesList;
-    
+
 
     private CurrentPage() {
     }
 
+    /**
+     * @return instance of currentPage ( singleton )
+     */
     public static CurrentPage getInstance() {
         if (instance == null) {
             instance = new CurrentPage();
@@ -27,10 +30,13 @@ public final class CurrentPage {
         return page;
     }
 
-    public void setPage(String currentPage) {
+    public void setPage(final String currentPage) {
         this.page = currentPage;
     }
 
+    /**
+     * initialize the data of the current page
+     */
     public void init() {
         page = "home";
         currentMoviesList = new ArrayList<>();

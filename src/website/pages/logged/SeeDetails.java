@@ -8,10 +8,20 @@ import website.CurrentUser;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static utilities.Constants.MIN_RATE;
+import static utilities.Constants.MAX_RATE;
 import static utilities.Constants.MOVIE_PRICE;
 
-public class SeeDetails {
-    public static boolean changePage(String movieName) {
+public final class SeeDetails {
+    private SeeDetails() {
+    }
+
+    /**
+     * handle the change page request for the see details page
+     * @param movieName the name of the movie to see the details
+     * @return if the page was changed
+     */
+    public static boolean changePage(final String movieName) {
         CurrentPage currentPage = CurrentPage.getInstance();
 
         if (!currentPage.getPage().equals("movies")) {
@@ -19,18 +29,25 @@ public class SeeDetails {
         }
 
         ArrayList<Movie> currentMoviesList = currentPage.getCurrentMoviesList();
-        Movie seeDetailsMovie =
-                currentMoviesList.stream().filter(movie -> movie.getName().equals(movieName)).findAny().orElse(null);
+        Movie seeDetailsMovie = currentMoviesList.stream()
+                                                 .filter(movie -> movie.getName()
+                                                                       .equals(movieName))
+                                                 .findAny().orElse(null);
 
         if (seeDetailsMovie == null) {
             return false;
         }
 
-        currentPage.setCurrentMoviesList(new ArrayList<>(Collections.singletonList(seeDetailsMovie)));
+        currentPage.setCurrentMoviesList(
+                new ArrayList<>(Collections.singletonList(seeDetailsMovie)));
         currentPage.setPage("see details");
         return true;
     }
 
+    /**
+     * handle the purchase request for the see details page
+     * @return if the purchase was successful
+     */
     public static boolean purchase() {
         CurrentPage currentPage = CurrentPage.getInstance();
         if (!currentPage.getPage().equals("see details")) {
@@ -65,6 +82,10 @@ public class SeeDetails {
         return true;
     }
 
+    /**
+     * handle the watch request for the see details page
+     * @return if the user watched the movie
+     */
     public static boolean watch() {
         CurrentPage currentPage = CurrentPage.getInstance();
         if (!currentPage.getPage().equals("see details")) {
@@ -89,6 +110,10 @@ public class SeeDetails {
         return true;
     }
 
+    /**
+     * handle the like request for the see details page
+     * @return if the user liked the movie
+     */
     public static boolean like() {
         CurrentPage currentPage = CurrentPage.getInstance();
         if (!currentPage.getPage().equals("see details")) {
@@ -114,13 +139,18 @@ public class SeeDetails {
         return true;
     }
 
-    public static boolean rate(int rateValue) {
+    /**
+     * handle the rate request for the see details page
+     * @param rateValue the rate value
+     * @return if the user rated the movie
+     */
+    public static boolean rate(final int rateValue) {
         CurrentPage currentPage = CurrentPage.getInstance();
         if (!currentPage.getPage().equals("see details")) {
             return false;
         }
 
-        if (rateValue < 1 || rateValue > 5) {
+        if (rateValue < MIN_RATE || rateValue > MAX_RATE) {
             return false;
         }
 

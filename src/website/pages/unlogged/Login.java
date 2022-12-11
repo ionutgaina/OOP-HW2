@@ -6,16 +6,21 @@ import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
 
-import java.util.ArrayList;
-
-public class Login {
+public final class Login {
     private Login() {
     }
 
+    /**
+     * handle the change page to login
+     *
+     * @return if the page was changed
+     */
     public static boolean changePage() {
         CurrentPage currentPage = CurrentPage.getInstance();
-        User currentUser = CurrentUser.getInstance().getUser();
-        if (currentPage.getPage().equals("home") && currentUser == null) {
+        User currentUser = CurrentUser.getInstance()
+                                      .getUser();
+        if (currentPage.getPage()
+                       .equals("home") && currentUser == null) {
             currentPage.setPage("login");
             return true;
         } else {
@@ -23,15 +28,25 @@ public class Login {
         }
     }
 
-    public static boolean login(String name, String password) {
-        String currentPage = CurrentPage.getInstance().getPage();
-        CurrentPage.getInstance().setPage("home");
+    /**
+     * handle the login
+     *
+     * @param name the username
+     * @param password the password
+     * @return if the login was successful
+     */
+    public static boolean login(final String name, final String password) {
+        String currentPage = CurrentPage.getInstance()
+                                        .getPage();
+        CurrentPage.getInstance()
+                   .setPage("home");
         if (!currentPage.equals("login")) {
             return false;
         }
 
         AuthController authController = AuthController.getInstance();
-        Database database = CurrentDatabase.getInstance().getDatabase();
+        Database database = CurrentDatabase.getInstance()
+                                           .getDatabase();
 
         User loggedUser = authController.login(name, password, database);
         if (loggedUser == null) {
@@ -42,11 +57,16 @@ public class Login {
         return true;
     }
 
+    /**
+     * handle the logout
+     *
+     * @return if the logout was successful
+     */
     public static boolean logout() {
-        CurrentPage currentPage = CurrentPage.getInstance();
-        String currentPageName = currentPage.getPage();
-        CurrentUser currentUser = CurrentUser.getInstance();
-        User user = currentUser.getUser();
+        CurrentPage currentPage     = CurrentPage.getInstance();
+        String      currentPageName = currentPage.getPage();
+        CurrentUser currentUser     = CurrentUser.getInstance();
+        User        user            = currentUser.getUser();
         if (currentPageName.equals("login") || currentPageName.equals("register")) {
             return false;
         }
