@@ -18,7 +18,7 @@ public class Main {
         String resultFile = args[1];
 
         // Here we choose the test file
-        if (!filePath.contains("2.")) {
+        if (!filePath.contains("3.")) {
             return;
         }
 
