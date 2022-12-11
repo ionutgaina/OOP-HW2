@@ -8,7 +8,6 @@ import website.pages.logged.Upgrades;
 import website.pages.unlogged.Login;
 import website.pages.unlogged.Register;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,8 +49,6 @@ public class OnPageHandler {
         List showErrorList = Arrays.asList("login", "register", "search", "filter", "purchase",
                 "watch", "like", "rate");
         if (!noError || showErrorList.contains(feature)) {
-//        outputObject.getOutput().add(action.getType() + " " + feature + " " + action
-//        .getStartsWith());
             outputObject.getOutput().addPOJO(new ErrorHandler(!noError));
         }
     }

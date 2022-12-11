@@ -17,11 +17,6 @@ public class Main {
         String filePath = args[0];
         String resultFile = args[1];
 
-        // Here we choose the test file
-//        if (!filePath.contains("8.")) {
-//            return;
-//        }
-
         ObjectMapper objectMapper = new ObjectMapper();
 
 
@@ -62,7 +57,6 @@ public class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         try {
             objectWriter.writeValue(new File(resultFile), outputObject.getOutput());
-            objectWriter.writeValue(new File("out.json"), outputObject.getOutput());
         } catch (IOException e) {
             e.printStackTrace();
         }
