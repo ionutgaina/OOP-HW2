@@ -28,7 +28,7 @@ public class Movies {
                     return true;
                 }
             }
-            case "see details", "upgrades" -> {
+            case "see details", "upgrades", "movies" -> {
                 initPage(currentUser, currentPage, database);
                 return true;
             }
@@ -56,10 +56,8 @@ public class Movies {
             return false;
         }
 
-        CurrentUser currentUser = CurrentUser.getInstance();
-        User user = currentUser.getUser();
-        CurrentDatabase currentDatabase = CurrentDatabase.getInstance();
-        Database database = currentDatabase.getDatabase();
+        User user = CurrentUser.getInstance().getUser();
+        Database database = CurrentDatabase.getInstance().getDatabase();
 
         // check the user country and filter the movies
         ArrayList<String> filterFields = new ArrayList<>();
@@ -84,7 +82,15 @@ public class Movies {
         if (!page.equals("movies")) {
             return false;
         }
-        ArrayList<Movie> movies = currentPage.getCurrentMoviesList();
+
+        User user = CurrentUser.getInstance().getUser();
+        Database database = CurrentDatabase.getInstance().getDatabase();
+
+        // check the user country and filter the movies
+        ArrayList<String> filterFields = new ArrayList<>();
+        filterFields.add(user.getCredentials().getCountry());
+        IFilter countryFilter = new FilterByCountry();
+        ArrayList<Movie> movies = countryFilter.doFilter(database.getMovies(), filterFields);
 
         Contains contains = filters.getContains();
         if (contains != null) {

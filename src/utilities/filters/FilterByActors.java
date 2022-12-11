@@ -12,11 +12,11 @@ public class FilterByActors implements IFilter{
             return movies;
         }
 
-        return (ArrayList<Movie>) movies
+        return movies
                 .stream()
                 .filter(movie -> filters
                         .stream()
                         .anyMatch( actor-> movie.getActors().contains(actor)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

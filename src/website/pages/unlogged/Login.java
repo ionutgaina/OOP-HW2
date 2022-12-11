@@ -54,9 +54,8 @@ public class Login {
             return false;
         }
 
-        currentUser.setUser(null);
-        currentPage.setPage("home");
-        currentPage.setCurrentMoviesList(new ArrayList<>());
+        currentPage.init();
+        currentUser.init();
         return true;
     }
 }

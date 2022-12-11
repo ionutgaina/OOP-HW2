@@ -12,11 +12,11 @@ public class FilterByCountry implements IFilter {
             return movies;
         }
 
-        return (ArrayList<Movie>) movies
+        return movies
                 .stream()
                 .filter(movie -> filters
                         .stream()
                         .anyMatch( country -> !movie.getCountriesBanned().contains(country)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

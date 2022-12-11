@@ -12,11 +12,11 @@ public class FilterByName implements IFilter {
             return movies;
         }
 
-        return (ArrayList<Movie>) movies
+        return movies
                 .stream()
                 .filter(movie -> filters
                         .stream()
                         .anyMatch( startsWith -> movie.getName().startsWith(startsWith)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

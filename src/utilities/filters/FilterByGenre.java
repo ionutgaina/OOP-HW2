@@ -12,11 +12,11 @@ public class FilterByGenre implements IFilter{
             return movies;
         }
 
-        return (ArrayList<Movie>) movies
+        return movies
                 .stream()
                 .filter(movie -> filters
                         .stream()
                         .anyMatch( genre-> movie.getGenres().contains(genre)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

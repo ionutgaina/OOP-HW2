@@ -1,8 +1,11 @@
 package database;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import website.CurrentDatabase;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Data
 public final class Movie {
@@ -17,6 +20,9 @@ public final class Movie {
     private int numRatings = 0;
     private double rating = 0;
 
+    @JsonIgnore
+    ArrayList<Double> ratings = new ArrayList<>();
+
     public Movie() {
     }
 
@@ -30,6 +36,13 @@ public final class Movie {
         this.numLikes = movie.getNumLikes();
         this.numRatings = movie.getNumRatings();
         this.rating = movie.getRating();
+        this.ratings = movie.getRatings();
+    }
+
+    public void addRate(final double rate) {
+        ratings.add(rate);
+        numRatings++;
+        this.rating = ratings.stream().collect(Collectors.averagingDouble(Double::doubleValue));
     }
 
     public String getName() {

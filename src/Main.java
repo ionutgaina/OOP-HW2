@@ -18,7 +18,7 @@ public class Main {
         String resultFile = args[1];
 
         // Here we choose the test file
-//        if (!filePath.contains("3.")) {
+//        if (!filePath.contains("8.")) {
 //            return;
 //        }
 
@@ -51,7 +51,7 @@ public class Main {
             String nextPage = action.getPage();
 
             if (type.equals("change page")) {
-                ChangePageHandler.handle(nextPage, outputObject);
+                ChangePageHandler.handle(nextPage, action, outputObject);
             }
             if (type.equals("on page")) {
                 OnPageHandler.handle(action, outputObject);
@@ -62,7 +62,7 @@ public class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         try {
             objectWriter.writeValue(new File(resultFile), outputObject.getOutput());
-            objectWriter.writeValue(new File("out.txt"), outputObject.getOutput());
+            objectWriter.writeValue(new File("out.json"), outputObject.getOutput());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,13 +30,21 @@ public final class User {
         this.tokensCount = user.tokensCount;
         this.numFreePremiumMovies = user.numFreePremiumMovies;
         this.purchasedMovies = new ArrayList<>();
-        this.purchasedMovies.addAll(user.purchasedMovies);
+        user.getPurchasedMovies().forEach((movie) -> {
+            this.purchasedMovies.add(new Movie(movie));
+        });
         this.watchedMovies = new ArrayList<>();
-        this.watchedMovies.addAll(user.watchedMovies);
+        user.getWatchedMovies().forEach((movie) -> {
+            this.watchedMovies.add(new Movie(movie));
+        });
         this.likedMovies = new ArrayList<>();
-        this.likedMovies.addAll(user.likedMovies);
+        user.getLikedMovies().forEach((movie) -> {
+            this.likedMovies.add(new Movie(movie));
+        });
         this.ratedMovies = new ArrayList<>();
-        this.ratedMovies.addAll(user.ratedMovies);
+        user.getRatedMovies().forEach((movie) -> {
+            this.ratedMovies.add(new Movie(movie));
+        });
     }
 
     public Credentials getCredentials() {
