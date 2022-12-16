@@ -34,29 +34,28 @@ public final class Main {
             e.printStackTrace();
         }
 
-        // create array node for output
-        Output outputObject = new Output(objectMapper);
-
         // start task
         CurrentPage     currentPage     = CurrentPage.getInstance();
         CurrentUser     currentUser     = CurrentUser.getInstance();
         CurrentDatabase currentDatabase = CurrentDatabase.getInstance();
+        Output outputObject = Output.getInstance();
 
         // init singleton instances values
         currentPage.init();
         currentUser.init();
         currentDatabase.init(database);
+        outputObject.init();
+
 
         // iterate over actions
         for (Action action : database.getActions()) {
             String type     = action.getType();
-            String nextPage = action.getPage();
 
             if (type.equals("change page")) {
-                ChangePageHandler.handle(nextPage, action, outputObject);
+                ChangePageHandler.handle(action);
             }
             if (type.equals("on page")) {
-                OnPageHandler.handle(action, outputObject);
+                OnPageHandler.handle(action);
             }
         }
 

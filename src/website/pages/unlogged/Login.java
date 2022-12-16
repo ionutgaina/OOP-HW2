@@ -7,7 +7,19 @@ import website.CurrentPage;
 import website.CurrentUser;
 
 public final class Login {
+    private static Login instance = null;
+
     private Login() {
+    }
+
+    /**
+     * @return the instance of the class Login
+     */
+    public static Login getInstance() {
+        if (instance == null) {
+            instance = new Login();
+        }
+        return instance;
     }
 
     /**

@@ -1,6 +1,5 @@
 package website.handlers;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.Action;
 import utilities.Output;
 import website.pages.logged.Movies;
@@ -16,25 +15,24 @@ public final class ChangePageHandler {
     /**
      * handle the changePage action
      *
-     * @param page         the page to be changed to
      * @param action       the action to be executed
-     * @param outputObject the output object
      */
-    public static void handle(final String page, final Action action, final Output outputObject) {
+    public static void handle(final Action action) {
+        String page = action.getPage();
         boolean noError = switch (page) {
-            case "register" -> Register.changePage();
-            case "login" -> Login.changePage();
-            case "logout" -> Login.logout();
-            case "movies" -> Movies.changePage();
-            case "see details" -> SeeDetails.changePage(action.getMovie());
-            case "upgrades" -> Upgrades.changePage();
+            case "register" -> Register.getInstance().changePage();
+            case "login" -> Login.getInstance().changePage();
+            case "logout" -> Login.getInstance().logout();
+            case "movies" -> Movies.getInstance().changePage();
+            case "see details" -> SeeDetails.getInstance().changePage(action.getMovie());
+            case "upgrades" -> Upgrades.getInstance().changePage();
             default -> false;
         };
 
         // Error handling
         if (!noError || page.equals("movies") || page.equals("see details")) {
-            ArrayNode output = outputObject.getOutput();
-            output.addPOJO(new ErrorHandler(!noError));
+            Output.getInstance().getOutput()
+                  .addPOJO(new ErrorHandler(!noError));
         }
     }
 }

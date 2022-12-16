@@ -8,7 +8,19 @@ import website.CurrentPage;
 import website.CurrentUser;
 
 public final class Register {
+    private static Register instance = null;
+
     private Register() {
+    }
+
+    /**
+     * @return the instance of the class Register
+     */
+    public static Register getInstance() {
+        if (instance == null) {
+            instance = new Register();
+        }
+        return instance;
     }
 
     /**

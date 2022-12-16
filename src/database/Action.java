@@ -1,7 +1,5 @@
 package database;
 
-import database.filters.Filters;
-
 public final class Action {
     private String type;
     private String page;

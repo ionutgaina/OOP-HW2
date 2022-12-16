@@ -1,4 +1,4 @@
-package database.filters;
+package database;
 
 public final class Sort {
     private String rating;

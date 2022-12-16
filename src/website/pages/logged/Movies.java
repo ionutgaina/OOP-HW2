@@ -3,9 +3,9 @@ package website.pages.logged;
 import database.Database;
 import database.Movie;
 import database.User;
-import database.filters.Contains;
-import database.filters.Filters;
-import database.filters.Sort;
+import database.Contains;
+import database.Filters;
+import database.Sort;
 import utilities.filters.IFilter;
 import utilities.filters.FilterByName;
 import utilities.filters.FilterByGenre;
@@ -21,7 +21,19 @@ import website.CurrentUser;
 import java.util.ArrayList;
 
 public final class Movies {
+    private static Movies instance = null;
+
     private Movies() {
+    }
+
+    /**
+     * @return the instance of the class Movies
+     */
+    public static Movies getInstance() {
+        if (instance == null) {
+            instance = new Movies();
+        }
+        return instance;
     }
     /**
      * handle the request to change to movies page

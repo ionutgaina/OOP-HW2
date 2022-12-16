@@ -14,6 +14,9 @@ public final class ErrorHandler {
     private String error;
     private User currentUser;
 
+    public ErrorHandler() {
+    }
+
     public ErrorHandler(final boolean isError) {
         if (isError) {
             error();

@@ -1,21 +1,26 @@
 package website.pages.logged;
 
-import database.Database;
-import database.Movie;
 import database.User;
-import utilities.filters.FilterByCountry;
-import utilities.filters.IFilter;
-import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
-
-import java.util.ArrayList;
 
 import static utilities.Constants.PREMIUM_PRICE;
 
 
 public final class Upgrades {
+    private static Upgrades instance = null;
+
     private Upgrades() {
+    }
+
+    /**
+     * @return the instance of the class Upgrades
+     */
+    public static Upgrades getInstance() {
+        if (instance == null) {
+            instance = new Upgrades();
+        }
+        return instance;
     }
 
     /**
@@ -29,12 +34,12 @@ public final class Upgrades {
         switch (currentPage.getPage()) {
             case "home" -> {
                 if (currentUser != null) {
-                    initPage(currentUser, currentPage, CurrentDatabase.getInstance().getDatabase());
+                    currentPage.setPage("upgrades");
                     return true;
                 }
             }
             case "see details" -> {
-                initPage(currentUser, currentPage, CurrentDatabase.getInstance().getDatabase());
+                currentPage.setPage("upgrades");
                 return true;
             }
             default -> {
@@ -42,23 +47,6 @@ public final class Upgrades {
             }
         }
         return false;
-    }
-
-    /**
-     * initialize the page
-     *
-     * @param currentUser the current user
-     * @param currentPage the current page
-     * @param database    the database
-     */
-    private static void initPage(final User currentUser, final CurrentPage currentPage,
-                                 final Database database) {
-        currentPage.setPage("upgrades");
-        ArrayList<String> countryFilter = new ArrayList<>();
-        countryFilter.add(currentUser.getCredentials().getCountry());
-        IFilter filter = new FilterByCountry();
-        ArrayList<Movie> movies = filter.doFilter(database.getMovies(), countryFilter);
-        currentPage.setCurrentMoviesList(movies);
     }
 
     /**

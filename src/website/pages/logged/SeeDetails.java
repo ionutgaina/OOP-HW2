@@ -13,7 +13,19 @@ import static utilities.Constants.MAX_RATE;
 import static utilities.Constants.MOVIE_PRICE;
 
 public final class SeeDetails {
+    private static SeeDetails instance = null;
+
     private SeeDetails() {
+    }
+
+    /**
+     * @return the instance of the class SeeDetails
+     */
+    public static SeeDetails getInstance() {
+        if (instance == null) {
+            instance = new SeeDetails();
+        }
+        return instance;
     }
 
     /**

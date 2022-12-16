@@ -1,4 +1,4 @@
-package database.filters;
+package database;
 
 
 import java.util.ArrayList;

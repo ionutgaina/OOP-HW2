@@ -1,4 +1,4 @@
-package database.filters;
+package database;
 
 public final class Filters {
     private Sort sort;
