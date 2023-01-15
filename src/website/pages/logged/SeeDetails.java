@@ -57,6 +57,37 @@ public final class SeeDetails {
     }
 
     /**
+     * handle the subscribe request
+     * @param subscribedGenre the genre to subscribe
+     * @return if to subscribe was successful
+     */
+    public static boolean subscribe(final String subscribedGenre) {
+        User currentUser = CurrentUser.getInstance().getUser();
+        CurrentPage currentPage = CurrentPage.getInstance();
+
+        // verify if the page is see details
+        if ( !currentPage.getPage().equals("see details"))
+        {
+            return false;
+        }
+
+        // verify if the user is already subscribed to the genre
+        if (currentUser.getSubscribedGenres().contains(subscribedGenre)) {
+            return false;
+        }
+
+        // verify if the genre is valid
+        Movie currentMovie = currentPage.getCurrentMoviesList().get(0);
+        if (!currentMovie.getGenres().contains(subscribedGenre)) {
+            return false;
+        }
+
+        // subscribe the user to the genre
+        currentUser.getSubscribedGenres().add(subscribedGenre);
+        return true;
+    }
+
+    /**
      * handle the purchase request for the see details page
      * @return if the purchase was successful
      */
@@ -176,9 +207,9 @@ public final class SeeDetails {
         }
 
         // verify if the user already rated the movie
-        if (user.getRatedMovies().contains(movie)) {
-            return false;
-        }
+//        if (user.getRatedMovies().contains(movie)) {
+//            return false;
+//        }
 
         user.getRatedMovies().add(movie);
         movie.addRate(rateValue);

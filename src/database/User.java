@@ -1,5 +1,7 @@
 package database;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 
 import static utilities.Constants.NUM_FREE_PREMIUM_MOVIES;
@@ -13,6 +15,10 @@ public final class User {
     private ArrayList<Movie> watchedMovies = new ArrayList<>();
     private ArrayList<Movie> likedMovies = new ArrayList<>();
     private ArrayList<Movie> ratedMovies = new ArrayList<>();
+    private ArrayList<Notification> notifications = new ArrayList<>();
+
+    @JsonIgnore
+    private ArrayList<String> subscribedGenres = new ArrayList<>();
 
     public User() {
     }
@@ -112,5 +118,21 @@ public final class User {
 
     public void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
+    }
+
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(final ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public ArrayList<String> getSubscribedGenres() {
+        return subscribedGenres;
+    }
+
+    public void setSubscribedGenres(final ArrayList<String> subscribedGenres) {
+        this.subscribedGenres = subscribedGenres;
     }
 }

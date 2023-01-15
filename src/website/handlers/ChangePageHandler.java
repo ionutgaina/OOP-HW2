@@ -2,6 +2,7 @@ package website.handlers;
 
 import database.Action;
 import utilities.Output;
+import website.pages.logged.Logout;
 import website.pages.logged.Movies;
 import website.pages.logged.SeeDetails;
 import website.pages.logged.Upgrades;
@@ -22,7 +23,7 @@ public final class ChangePageHandler {
         boolean noError = switch (page) {
             case "register" -> Register.getInstance().changePage();
             case "login" -> Login.getInstance().changePage();
-            case "logout" -> Login.getInstance().logout();
+            case "logout" -> Logout.getInstance().changePage();
             case "movies" -> Movies.getInstance().changePage();
             case "see details" -> SeeDetails.getInstance().changePage(action.getMovie());
             case "upgrades" -> Upgrades.getInstance().changePage();

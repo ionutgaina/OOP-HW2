@@ -68,26 +68,4 @@ public final class Login {
         currentUser.setUser(loggedUser);
         return true;
     }
-
-    /**
-     * handle the logout
-     *
-     * @return if the logout was successful
-     */
-    public static boolean logout() {
-        CurrentPage currentPage     = CurrentPage.getInstance();
-        String      currentPageName = currentPage.getPage();
-        CurrentUser currentUser     = CurrentUser.getInstance();
-        User        user            = currentUser.getUser();
-        if (currentPageName.equals("login") || currentPageName.equals("register")) {
-            return false;
-        }
-        if (currentPageName.equals("home") && user == null) {
-            return false;
-        }
-
-        currentPage.init();
-        currentUser.init();
-        return true;
-    }
 }

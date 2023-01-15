@@ -8,6 +8,7 @@ import website.CurrentPage;
 import website.CurrentUser;
 import website.handlers.ChangePageHandler;
 import website.handlers.OnPageHandler;
+import website.handlers.PageListHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,11 @@ public final class Main {
         String filePath   = args[0];
         String resultFile = args[1];
 
+
+        if (!filePath.contains("basic_2."))
+            return;
+
+
         ObjectMapper objectMapper = new ObjectMapper();
 
 
@@ -39,12 +45,14 @@ public final class Main {
         CurrentUser     currentUser     = CurrentUser.getInstance();
         CurrentDatabase currentDatabase = CurrentDatabase.getInstance();
         Output outputObject = Output.getInstance();
+        PageListHandler pageListHandler = PageListHandler.getInstance();
 
         // init singleton instances values
         currentPage.init();
         currentUser.init();
         currentDatabase.init(database);
         outputObject.init();
+        pageListHandler.init();
 
 
         // iterate over actions
@@ -52,7 +60,10 @@ public final class Main {
             String type     = action.getType();
 
             if (type.equals("change page")) {
-                ChangePageHandler.handle(action);
+                pageListHandler.changePage(action);
+            }
+            if (type.equals("back")) {
+                pageListHandler.undo();
             }
             if (type.equals("on page")) {
                 OnPageHandler.handle(action);
@@ -63,6 +74,7 @@ public final class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         try {
             objectWriter.writeValue(new File(resultFile), outputObject.getOutput());
+            objectWriter.writeValue(new File("output.json"), outputObject.getOutput());
         } catch (IOException e) {
             e.printStackTrace();
         }
