@@ -42,7 +42,12 @@ public final class Database {
      * @return true if the movie was added, false otherwise
      */
     public boolean add(final Movie movie) {
-        if (movies.contains(movie)) {return false;}
+
+        String movieName = movie.getName();
+
+        if (movies.stream().anyMatch(m -> m.getName().equals(movieName))) {
+            return false;
+        }
 
         movies.add(movie);
         notifyUsers(movie);

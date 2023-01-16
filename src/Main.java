@@ -8,7 +8,6 @@ import utilities.Output;
 import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
-import website.handlers.ChangePageHandler;
 import website.handlers.DatabaseActionsHandler;
 import website.handlers.OnPageHandler;
 import website.handlers.PageListHandler;
@@ -29,7 +28,7 @@ public final class Main {
         String resultFile = args[1];
 
 
-//        if (!filePath.contains("basic_4."))
+//        if (!filePath.contains("basic_8."))
 //            return;
 
 
@@ -63,7 +62,7 @@ public final class Main {
             String type     = action.getType();
 
 //            Output.getInstance().getOutput()
-//                  .add(action.getType());
+//                  .add(action.getType() + " " + action.getFeature());
             if (type.equals("change page")) {
                 pageListHandler.changePage(action);
             }

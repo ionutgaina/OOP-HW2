@@ -22,7 +22,7 @@ public final class Recomandation {
         ArrayList<Movie> movies = CurrentDatabase.getInstance().getDatabase().getMovies();
         ArrayList<String> genres = currentUser.getSubscribedGenres();
 
-        if (genres.isEmpty() || movies.isEmpty()) {
+        if (movies.isEmpty()) {
             return "No recommendation";
         }
 
@@ -60,8 +60,21 @@ public final class Recomandation {
                                                     ArrayList<String> genres) {
         // hasmap with genres and numbers of likes
         HashMap<String, Integer> genresLikes = new HashMap<>();
-        for (String genre : genres) {
-            genresLikes.put(genre, 0);
+        if (genres.isEmpty()) {
+            // put all genres in the hashmap with streams
+            movies.stream()
+                  .flatMap(movie -> movie.getGenres().stream())
+                  .distinct()
+                  .forEach(genre -> genresLikes.put(genre, 0));
+
+            if (genresLikes.isEmpty()) {
+                return genresLikes;
+            }
+        }
+        else {
+            for (String genre : genres) {
+                genresLikes.put(genre, 0);
+            }
         }
 
         // add the number of likes for each genre with streams
@@ -74,6 +87,9 @@ public final class Recomandation {
                       }
                   }
               });
+
+        // filter genres with 0 likes
+        genresLikes.entrySet().removeIf(entry -> entry.getValue() == 0);
 
         return genresLikes;
     }

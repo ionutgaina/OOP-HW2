@@ -29,7 +29,7 @@ public class DatabaseActionsHandler {
 //            Output.getInstance().getOutput()
 //                    .add("database " + feature);
             Output.getInstance().getOutput()
-                    .addPOJO(new ErrorHandler(false));
+                    .addPOJO(new ErrorHandler(true));
         }
     }
 }
