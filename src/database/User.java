@@ -70,7 +70,9 @@ public final class User {
         this.notifications = new ArrayList<>();
         user.getNotifications()
             .forEach((notification) -> {
-                this.notifications.add(new Notification(notification));
+                this.notifications.add(new Notification.NotificationBuilder()
+                                               .notification(notification)
+                                               .build());
             });
     }
 

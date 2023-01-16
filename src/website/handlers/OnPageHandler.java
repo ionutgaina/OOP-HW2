@@ -37,7 +37,7 @@ public final class OnPageHandler {
             case "buy premium account" -> Upgrades.getInstance().buyPremium();
             case "buy tokens" -> Upgrades.getInstance()
                                          .buyTokens(Integer.parseInt(action.getCount()));
-            case "subscribe" -> SeeDetails.getInstance().subscribe(action.getsubscribedGenre());
+            case "subscribe" -> SeeDetails.getInstance().subscribe(action.getSubscribedGenre());
             default -> false;
         };
 

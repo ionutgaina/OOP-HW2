@@ -63,7 +63,11 @@ public final class Database {
     public void notifyUsers(final Movie movie) {
         ArrayList<String> bannedCountry = movie.getCountriesBanned();
 
-        Notification notification = new Notification(movie.getName(), "ADD");
+        Notification notification =
+                new Notification.NotificationBuilder()
+                .movieName(movie.getName())
+                .message("ADD")
+                .build();
 
         ArrayList<String> movieGenres = movie.getGenres();
 
@@ -109,7 +113,10 @@ public final class Database {
                     user.setTokensCount(user.getTokensCount() + 2);
                 }
 
-                Notification notification = new Notification(movieToDelete.getName(), "DELETE");
+                Notification notification = new Notification.NotificationBuilder()
+                        .movieName(movieToDelete.getName())
+                        .message("DELETE")
+                        .build();
                 user.getNotifications().add(notification);
             }
         });

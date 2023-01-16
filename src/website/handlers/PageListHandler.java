@@ -6,10 +6,9 @@ import website.CurrentPage;
 
 import java.util.LinkedList;
 
-public class PageListHandler {
+public final class PageListHandler {
     private static PageListHandler instance = null;
     private LinkedList<Action> pageChangeActions = new LinkedList<>();
-    private boolean extraUndo = false;
 
     private PageListHandler() {
     }
@@ -25,6 +24,7 @@ public class PageListHandler {
     }
 
     /**
+     * execute the change page action
      * add an action to the list of actions
      *
      * @param action the action to be added
@@ -41,10 +41,10 @@ public class PageListHandler {
             return;
         }
 
+        String page = CurrentPage.getInstance().getPage();
         if (ChangePageHandler.handle(action)) {
             pageChangeActions.push(action);
-            action.setCurrentPage(CurrentPage.getInstance().getPage());
-            extraUndo = true;
+            action.setCurrentPage(page);
         }
     }
 
@@ -67,16 +67,13 @@ public class PageListHandler {
         Action action = pageChangeActions.peek();
         CurrentPage.getInstance().setPage(action.getCurrentPage());
 
-//        if (extraUndo) {
-//            extraUndo = false;
-//            undo();
-//            return;
-//        }
         ChangePageHandler.handle(action);
     }
 
+    /**
+     * initialize the list of actions
+     */
     public void init() {
         pageChangeActions = new LinkedList<>();
-        extraUndo = false;
     }
 }

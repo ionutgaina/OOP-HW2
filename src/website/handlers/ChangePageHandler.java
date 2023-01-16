@@ -21,19 +21,18 @@ public final class ChangePageHandler {
     public static boolean handle(final Action action) {
         String page = action.getPage();
         boolean noError = switch (page) {
-            case "register" -> Register.getInstance().changePage();
-            case "login" -> Login.getInstance().changePage();
-            case "logout" -> Logout.getInstance().changePage();
-            case "movies" -> Movies.getInstance().changePage();
-            case "see details" -> SeeDetails.getInstance().changePage(action.getMovie());
-            case "upgrades" -> Upgrades.getInstance().changePage();
+            case "register" -> Register.changePage();
+            case "login" -> Login.changePage();
+            case "logout" -> Logout.changePage();
+            case "movies" -> Movies.changePage();
+            case "see details" -> SeeDetails.changePage(action.getMovie());
+            case "upgrades" -> Upgrades.changePage();
             default -> false;
         };
 
         // Error handling
         if (!noError || page.equals("movies") || page.equals("see details")) {
-//            Output.getInstance().getOutput()
-//                  .add("changepage " + page);
+
             Output.getInstance().getOutput()
                   .addPOJO(new ErrorHandler(!noError));
         }

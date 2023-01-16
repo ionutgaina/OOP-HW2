@@ -12,7 +12,7 @@ public final class Movie {
     @JsonIgnore
     private ArrayList<Double> ratings = new ArrayList<>();
     private String name;
-    @JsonFormat(shape= JsonFormat.Shape.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private int year;
     private int duration;
     private ArrayList<String> genres;
@@ -46,15 +46,18 @@ public final class Movie {
     public void addRate(final double rate) {
         ratings.add(rate);
         numRatings++;
-        this.rating = ratings.stream()
-                             .collect(Collectors.averagingDouble(Double::doubleValue));
+        this.rating = ratings.stream().collect(Collectors.averagingDouble(Double::doubleValue));
     }
 
+    /**
+     * operations to be performed when a user likes a movie
+     *
+     * @param rate the rate value given by the user
+     */
     public void removeRate(final double rate) {
         ratings.remove(rate);
         numRatings--;
-        this.rating = ratings.stream()
-                             .collect(Collectors.averagingDouble(Double::doubleValue));
+        this.rating = ratings.stream().collect(Collectors.averagingDouble(Double::doubleValue));
     }
 
     public String getName() {

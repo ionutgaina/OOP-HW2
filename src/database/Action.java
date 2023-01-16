@@ -91,12 +91,8 @@ public final class Action {
         this.rate = rate;
     }
 
-    public String getsubscribedGenre() {
+    public String getSubscribedGenre() {
         return subscribedGenre;
-    }
-
-    public void setsubscribedGenre(final String subscribedGenre) {
-        this.subscribedGenre = subscribedGenre;
     }
 
     public Movie getAddedMovie() {

@@ -28,9 +28,6 @@ public final class Main {
         String resultFile = args[1];
 
 
-//        if (!filePath.contains("basic_8."))
-//            return;
-
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -58,11 +55,10 @@ public final class Main {
 
 
         // iterate over actions
+        assert database != null;
         for (Action action : database.getActions()) {
             String type     = action.getType();
 
-//            Output.getInstance().getOutput()
-//                  .add(action.getType() + " " + action.getFeature());
             if (type.equals("change page")) {
                 pageListHandler.changePage(action);
             }
@@ -89,7 +85,6 @@ public final class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         try {
             objectWriter.writeValue(new File(resultFile), outputObject.getOutput());
-            objectWriter.writeValue(new File("output.json"), outputObject.getOutput());
         } catch (IOException e) {
             e.printStackTrace();
         }

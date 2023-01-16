@@ -26,8 +26,6 @@ public class DatabaseActionsHandler {
 
         // Error handling
         if (!noError) {
-//            Output.getInstance().getOutput()
-//                    .add("database " + feature);
             Output.getInstance().getOutput()
                     .addPOJO(new ErrorHandler(true));
         }
