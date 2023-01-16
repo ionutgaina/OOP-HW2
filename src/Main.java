@@ -29,8 +29,8 @@ public final class Main {
         String resultFile = args[1];
 
 
-        if (!filePath.contains("basic_4."))
-            return;
+//        if (!filePath.contains("basic_4."))
+//            return;
 
 
         ObjectMapper objectMapper = new ObjectMapper();

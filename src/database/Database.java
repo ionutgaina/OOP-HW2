@@ -103,10 +103,10 @@ public final class Database {
                 } else {
                     user.setTokensCount(user.getTokensCount() + 2);
                 }
-            }
 
-            Notification notification = new Notification(movieToDelete.getName(), "DELETE");
-            user.getNotifications().add(notification);
+                Notification notification = new Notification(movieToDelete.getName(), "DELETE");
+                user.getNotifications().add(notification);
+            }
         });
 
 
