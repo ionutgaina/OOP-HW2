@@ -3,33 +3,58 @@ package database;
 import lombok.Data;
 
 @Data
-public class Notification {
+public final class Notification {
     private String movieName;
     private String message;
 
-    public static class NotificationBuilder {
+    public static final class NotificationBuilder {
         private String movieName;
         private String message;
 
         public NotificationBuilder() {
         }
 
-        public NotificationBuilder movieName(final String movieName) {
-            this.movieName = movieName;
+        /**
+         * set movie name to notification
+         *
+         * @param movieNameSet the movie name to set
+         * @return the builder
+         */
+        public NotificationBuilder movieName(final String movieNameSet) {
+            this.movieName = movieNameSet;
             return this;
         }
 
-        public NotificationBuilder message(final String message) {
-            this.message = message;
+        /**
+         * set message to notification
+         *
+         * @param messageSet the message to set
+         * @return the builder
+         */
+        public NotificationBuilder message(final String messageSet) {
+            this.message = messageSet;
             return this;
         }
 
+
+        /**
+         * set the notification
+         *
+         * @param notification is the notification to set
+         * @return the notification
+         */
         public NotificationBuilder notification(final Notification notification) {
             this.movieName = notification.movieName;
             this.message = notification.message;
             return this;
         }
 
+
+        /**
+         * build the notification
+         *
+         * @return the notification
+         */
         public Notification build() {
             return new Notification(this);
         }

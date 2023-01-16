@@ -4,7 +4,7 @@ import database.User;
 import website.CurrentPage;
 import website.CurrentUser;
 
-public class Logout {
+public final class Logout {
     private static Logout instance = null;
 
     private Logout() {

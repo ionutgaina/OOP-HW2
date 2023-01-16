@@ -5,7 +5,7 @@ import database.Database;
 import utilities.Output;
 import website.CurrentDatabase;
 
-public class DatabaseActionsHandler {
+public final class DatabaseActionsHandler {
     private DatabaseActionsHandler() {
     }
 

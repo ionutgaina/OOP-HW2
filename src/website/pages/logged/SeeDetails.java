@@ -30,6 +30,7 @@ public final class SeeDetails {
 
     /**
      * handle the change page request for the see details page
+     *
      * @param movieName the name of the movie to see the details
      * @return if the page was changed
      */
@@ -42,8 +43,7 @@ public final class SeeDetails {
 
         ArrayList<Movie> currentMoviesList = currentPage.getCurrentMoviesList();
         Movie seeDetailsMovie = currentMoviesList.stream()
-                                                 .filter(movie -> movie.getName()
-                                                                       .equals(movieName))
+                                                 .filter(movie -> movie.getName().equals(movieName))
                                                  .findAny().orElse(null);
 
         if (seeDetailsMovie == null) {
@@ -58,6 +58,7 @@ public final class SeeDetails {
 
     /**
      * handle the subscribe request
+     *
      * @param subscribedGenre the genre to subscribe
      * @return if to subscribe was successful
      */
@@ -66,8 +67,7 @@ public final class SeeDetails {
         CurrentPage currentPage = CurrentPage.getInstance();
 
         // verify if the page is see details
-        if ( !currentPage.getPage().equals("see details"))
-        {
+        if (!currentPage.getPage().equals("see details")) {
             return false;
         }
 
@@ -89,6 +89,7 @@ public final class SeeDetails {
 
     /**
      * handle the purchase request for the see details page
+     *
      * @return if the purchase was successful
      */
     public static boolean purchase() {
@@ -127,6 +128,7 @@ public final class SeeDetails {
 
     /**
      * handle the watch request for the see details page
+     *
      * @return if the user watched the movie
      */
     public static boolean watch() {
@@ -155,6 +157,7 @@ public final class SeeDetails {
 
     /**
      * handle the like request for the see details page
+     *
      * @return if the user liked the movie
      */
     public static boolean like() {
@@ -184,6 +187,7 @@ public final class SeeDetails {
 
     /**
      * handle the rate request for the see details page
+     *
      * @param rateValue the rate value
      * @return if the user rated the movie
      */
