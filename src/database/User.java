@@ -66,6 +66,12 @@ public final class User {
             .forEach((movie) -> {
                 this.ratedMovies.add(new Movie(movie));
             });
+
+        this.notifications = new ArrayList<>();
+        user.getNotifications()
+            .forEach((notification) -> {
+                this.notifications.add(new Notification(notification));
+            });
     }
 
     public Credentials getCredentials() {

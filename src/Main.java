@@ -8,6 +8,7 @@ import utilities.Output;
 import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
+import website.handlers.ChangePageHandler;
 import website.handlers.DatabaseActionsHandler;
 import website.handlers.OnPageHandler;
 import website.handlers.PageListHandler;
@@ -28,8 +29,8 @@ public final class Main {
         String resultFile = args[1];
 
 
-//        if (!filePath.contains("basic_2."))
-//            return;
+        if (!filePath.contains("basic_4."))
+            return;
 
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -61,6 +62,8 @@ public final class Main {
         for (Action action : database.getActions()) {
             String type     = action.getType();
 
+//            Output.getInstance().getOutput()
+//                  .add(action.getType());
             if (type.equals("change page")) {
                 pageListHandler.changePage(action);
             }
@@ -73,10 +76,10 @@ public final class Main {
             if (type.equals("database")) {
                 DatabaseActionsHandler.handle(action);
             }
+
         }
 
         // set the reccomended movies
-
         User user = currentUser.getUser();
         if (user != null && user.getCredentials().getAccountType().equals("premium")) {
             Recomandation recomandation = new Recomandation();

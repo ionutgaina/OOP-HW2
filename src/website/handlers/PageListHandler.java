@@ -41,10 +41,11 @@ public class PageListHandler {
             return;
         }
 
-        pageChangeActions.push(action);
-        action.setCurrentPage(CurrentPage.getInstance().getPage());
-        extraUndo = true;
-        ChangePageHandler.handle(action);
+        if (ChangePageHandler.handle(action)) {
+            pageChangeActions.push(action);
+            action.setCurrentPage(CurrentPage.getInstance().getPage());
+            extraUndo = true;
+        }
     }
 
     /**
@@ -57,14 +58,20 @@ public class PageListHandler {
             return;
         }
 
-        Action action = pageChangeActions.pop();
-        CurrentPage.getInstance().setPage(action.getCurrentPage());
-
-        if (extraUndo) {
-            extraUndo = false;
-            undo();
+        pageChangeActions.pop();
+        if (pageChangeActions.isEmpty()) {
+            CurrentPage.getInstance().setPage("home");
             return;
         }
+
+        Action action = pageChangeActions.peek();
+        CurrentPage.getInstance().setPage(action.getCurrentPage());
+
+//        if (extraUndo) {
+//            extraUndo = false;
+//            undo();
+//            return;
+//        }
         ChangePageHandler.handle(action);
     }
 

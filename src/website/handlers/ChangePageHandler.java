@@ -18,7 +18,7 @@ public final class ChangePageHandler {
      *
      * @param action       the action to be executed
      */
-    public static void handle(final Action action) {
+    public static boolean handle(final Action action) {
         String page = action.getPage();
         boolean noError = switch (page) {
             case "register" -> Register.getInstance().changePage();
@@ -37,5 +37,7 @@ public final class ChangePageHandler {
             Output.getInstance().getOutput()
                   .addPOJO(new ErrorHandler(!noError));
         }
+
+        return noError;
     }
 }

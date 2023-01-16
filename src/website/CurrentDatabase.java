@@ -1,7 +1,13 @@
 package website;
 
 import database.Database;
+import database.Movie;
+import database.Notification;
+import database.User;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Data
 public final class CurrentDatabase {
