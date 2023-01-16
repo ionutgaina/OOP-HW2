@@ -16,7 +16,7 @@ public final class SortByRating implements ISort {
     public void doSort(final ArrayList<Movie> movies) {
         if (sortType.equals("increasing")) {
             movies.sort(Comparator.comparing(Movie::getRating));
-        } else if (sortType.equals("desc")) {
+        } else if (sortType.equals("decreasing")) {
             movies.sort(Comparator.comparing(Movie::getRating)
                                   .reversed());
         } else {

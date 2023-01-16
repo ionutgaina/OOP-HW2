@@ -32,6 +32,8 @@ public final class ChangePageHandler {
 
         // Error handling
         if (!noError || page.equals("movies") || page.equals("see details")) {
+//            Output.getInstance().getOutput()
+//                  .add("changepage " + page);
             Output.getInstance().getOutput()
                   .addPOJO(new ErrorHandler(!noError));
         }

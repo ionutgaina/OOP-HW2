@@ -46,6 +46,8 @@ public final class OnPageHandler {
                                                    "purchase",
                                                    "watch", "like", "rate");
         if (!noError || showErrorList.contains(feature)) {
+//            Output.getInstance().getOutput()
+//                  .add("onpage " + feature);
             Output.getInstance().getOutput()
                         .addPOJO(new ErrorHandler(!noError));
         }

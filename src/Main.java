@@ -2,11 +2,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import database.Action;
 import database.Database;
+import database.Recomandation;
+import database.User;
 import utilities.Output;
 import website.CurrentDatabase;
 import website.CurrentPage;
 import website.CurrentUser;
-import website.handlers.ChangePageHandler;
+import website.handlers.DatabaseActionsHandler;
 import website.handlers.OnPageHandler;
 import website.handlers.PageListHandler;
 
@@ -26,8 +28,8 @@ public final class Main {
         String resultFile = args[1];
 
 
-        if (!filePath.contains("basic_2."))
-            return;
+//        if (!filePath.contains("basic_2."))
+//            return;
 
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -68,6 +70,17 @@ public final class Main {
             if (type.equals("on page")) {
                 OnPageHandler.handle(action);
             }
+            if (type.equals("database")) {
+                DatabaseActionsHandler.handle(action);
+            }
+        }
+
+        // set the reccomended movies
+
+        User user = currentUser.getUser();
+        if (user != null && user.getCredentials().getAccountType().equals("premium")) {
+            Recomandation recomandation = new Recomandation();
+            outputObject.getOutput().addPOJO(recomandation);
         }
 
         // create output file

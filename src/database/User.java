@@ -15,10 +15,14 @@ public final class User {
     private ArrayList<Movie> watchedMovies = new ArrayList<>();
     private ArrayList<Movie> likedMovies = new ArrayList<>();
     private ArrayList<Movie> ratedMovies = new ArrayList<>();
+
     private ArrayList<Notification> notifications = new ArrayList<>();
 
     @JsonIgnore
     private ArrayList<String> subscribedGenres = new ArrayList<>();
+
+    @JsonIgnore
+    private ArrayList<Integer> ratings = new ArrayList<>();
 
     public User() {
     }
@@ -134,5 +138,13 @@ public final class User {
 
     public void setSubscribedGenres(final ArrayList<String> subscribedGenres) {
         this.subscribedGenres = subscribedGenres;
+    }
+
+    public ArrayList<Integer> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(final ArrayList<Integer> ratings) {
+        this.ratings = ratings;
     }
 }

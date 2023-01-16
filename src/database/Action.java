@@ -12,6 +12,9 @@ public final class Action {
     private int rate;
     private String subscribedGenre;
     private Movie addedMovie;
+    private String deletedMovie;
+
+    private String currentPage;
 
     public Action() {
     }
@@ -102,5 +105,21 @@ public final class Action {
 
     public void setAddedMovie(final Movie addedMovie) {
         this.addedMovie = addedMovie;
+    }
+
+    public String getDeletedMovie() {
+        return deletedMovie;
+    }
+
+    public void setDeletedMovie(final String deletedMovie) {
+        this.deletedMovie = deletedMovie;
+    }
+
+    public String getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(final String currentPage) {
+        this.currentPage = currentPage;
     }
 }

@@ -146,7 +146,7 @@ public final class SeeDetails {
 
         // verify if the user already watched the movie
         if (user.getWatchedMovies().contains(movie)) {
-            return false;
+            return true;
         }
 
         user.getWatchedMovies().add(movie);
@@ -207,11 +207,18 @@ public final class SeeDetails {
         }
 
         // verify if the user already rated the movie
-//        if (user.getRatedMovies().contains(movie)) {
-//            return false;
-//        }
+        if (user.getRatedMovies().contains(movie)) {
+            int index = user.getRatedMovies().indexOf(movie);
+            movie.removeRate(user.getRatings().get(index));
+
+            user.getRatings().set(index, rateValue);
+            user.getRatedMovies().get(index).setRating(rateValue);
+            movie.addRate(rateValue);
+            return true;
+        }
 
         user.getRatedMovies().add(movie);
+        user.getRatings().add(rateValue);
         movie.addRate(rateValue);
         return true;
     }

@@ -1,5 +1,6 @@
 package database;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ public final class Movie {
     @JsonIgnore
     private ArrayList<Double> ratings = new ArrayList<>();
     private String name;
+    @JsonFormat(shape= JsonFormat.Shape.STRING)
     private int year;
     private int duration;
     private ArrayList<String> genres;
@@ -44,6 +46,13 @@ public final class Movie {
     public void addRate(final double rate) {
         ratings.add(rate);
         numRatings++;
+        this.rating = ratings.stream()
+                             .collect(Collectors.averagingDouble(Double::doubleValue));
+    }
+
+    public void removeRate(final double rate) {
+        ratings.remove(rate);
+        numRatings--;
         this.rating = ratings.stream()
                              .collect(Collectors.averagingDouble(Double::doubleValue));
     }

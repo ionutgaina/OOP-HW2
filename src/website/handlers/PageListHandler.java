@@ -2,12 +2,14 @@ package website.handlers;
 
 import database.Action;
 import utilities.Output;
+import website.CurrentPage;
 
 import java.util.LinkedList;
 
 public class PageListHandler {
     private static PageListHandler instance = null;
     private LinkedList<Action> pageChangeActions = new LinkedList<>();
+    private boolean extraUndo = false;
 
     private PageListHandler() {
     }
@@ -29,7 +31,7 @@ public class PageListHandler {
      */
     public void changePage(final Action action) {
         if (action.getPage().equals("logout")) {
-            pageChangeActions.clear();
+            init();
             ChangePageHandler.handle(action);
             return;
         }
@@ -40,6 +42,8 @@ public class PageListHandler {
         }
 
         pageChangeActions.push(action);
+        action.setCurrentPage(CurrentPage.getInstance().getPage());
+        extraUndo = true;
         ChangePageHandler.handle(action);
     }
 
@@ -54,10 +58,18 @@ public class PageListHandler {
         }
 
         Action action = pageChangeActions.pop();
+        CurrentPage.getInstance().setPage(action.getCurrentPage());
+
+        if (extraUndo) {
+            extraUndo = false;
+            undo();
+            return;
+        }
         ChangePageHandler.handle(action);
     }
 
     public void init() {
         pageChangeActions = new LinkedList<>();
+        extraUndo = false;
     }
 }
